@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Platforms>x64;x86</Platforms>
+    <Version>4.2.0</Version>
+  </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+      <DefineConstants>DEBUG;TRACE</DefineConstants>
+      <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+      <Optimize>False</Optimize>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+      <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call &quot;$(FK_CORE22_DIR)\com\fkcopy.bat&quot; &quot;$(ProjectDir)&quot; &quot;$(TargetDir)&quot; $(PlatformName)" />
+  </Target>
+  <ItemGroup>
+    <Reference Include="FK_Core">
+      <HintPath>$(FK_CORE22_DIR)\bin\$(PlatformName)\FK_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FK_Audio_Core">
+      <HintPath>$(FK_CORE22_DIR)\bin\$(PlatformName)\FK_Audio_Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
